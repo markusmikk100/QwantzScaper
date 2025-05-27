@@ -5,7 +5,7 @@ import path from "path";
 
 function cacheGet(name) {
   if (fs.existsSync(`./cache/${name}.html`)) {
-    return fs.readFileSync(`./cache/${name}.html`, "utf-8");
+    return fs.readFileSync(`./cache/${name}.html`);
   }
   return false;
 }
@@ -14,7 +14,7 @@ function cacheSet(name, value) {
   if (!fs.existsSync("./cache")) {
     fs.mkdirSync("./cache");
   }
-  fs.writeFileSync(`./cache/${name}.html`, value, "utf-8");
+  fs.writeFileSync(`./cache/${name}.html`, value);
 }
 
 function sleep(ms) {
@@ -54,7 +54,6 @@ async function scrapeQwantz() {
     const imgElem = $("img.comic");
     const imgSrc = imgElem.attr("src");
 
-    // Only save if png and src matches pattern comics/comic2-*.png
     if (
       imgSrc &&
       imgSrc.startsWith("comics/comic2-") &&
